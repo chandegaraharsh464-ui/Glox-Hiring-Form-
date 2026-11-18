@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Glox | Candidate Application Form</title>
+  <title>Glox | Careers &amp; Candidate Application</title>
+  <!-- Browser Tab Favicon using your official Glox logo -->
+  <link rel="icon" type="image/png" href="./official-glox-logo-sitemap.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,12 +31,13 @@
   <div class="max-w-2xl mx-auto">
     <!-- Top Header & Share QR Button -->
     <div class="flex items-center justify-between mb-6">
-      <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-xl glox-gradient flex items-center justify-center shadow-lg shadow-purple-500/25">
-          <svg viewBox="0 0 64 64" class="w-7 h-7 fill-white">
-            <path d="M44 16A18 18 0 1 0 44 48V34H30l-5 7h11v4a10 10 0 1 1 0-20 9.8 9.8 0 0 1 7 2.9l5.7-5.7A17.9 17.9 0 0 0 44 16z"/>
-          </svg>
-        </div>
+      <div class="flex items-center gap-3.5">
+        <!-- Your Exact Official Glox Logo -->
+        <img
+          src="./official-glox-logo-sitemap.png"
+          alt="Glox Official Logo"
+          class="w-12 h-12 rounded-xl object-cover shadow-lg shadow-purple-500/25 border border-purple-200"
+        />
         <div>
           <h1 class="text-xl font-bold tracking-tight text-slate-900">Glox</h1>
           <p class="text-xs font-medium text-purple-600">Talent &amp; Recruitment Portal</p>
@@ -52,10 +55,17 @@
 
     <!-- Main Form Card -->
     <div class="bg-white/95 backdrop-blur rounded-2xl shadow-xl shadow-purple-900/5 border border-purple-100 overflow-hidden">
-      <div class="glox-gradient px-6 py-6 sm:px-8 text-white">
-        <span class="inline-block px-2.5 py-0.5 rounded-full bg-white/15 text-xs font-medium mb-2">We're Hiring</span>
-        <h2 class="text-2xl font-bold">Candidate Application Form</h2>
-        <p class="text-purple-100 text-sm mt-1">Please fill out your details accurately. Our hiring team at Glox will review and reach out shortly.</p>
+      <div class="glox-gradient px-6 py-6 sm:px-8 text-white flex items-center justify-between gap-4">
+        <div>
+          <span class="inline-block px-2.5 py-0.5 rounded-full bg-white/15 text-xs font-medium mb-2">We're Hiring</span>
+          <h2 class="text-2xl font-bold">Candidate Application Form</h2>
+          <p class="text-purple-100 text-sm mt-1">Please fill out your details accurately. Our hiring team at Glox will review and reach out shortly.</p>
+        </div>
+        <img
+          src="./official-glox-logo-sitemap.png"
+          alt="Glox"
+          class="hidden sm:block w-16 h-16 rounded-2xl object-cover border-2 border-white/25 shadow-md shrink-0"
+        />
       </div>
 
       <form id="hiringForm" class="p-6 sm:p-8 space-y-5">
@@ -191,7 +201,10 @@
   <div id="qrModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
     <div class="bg-white rounded-2xl max-w-sm w-full p-6 text-center shadow-2xl space-y-4">
       <div class="flex justify-between items-center">
-        <h3 class="font-bold text-slate-900">Scan to Apply — Glox</h3>
+        <div class="flex items-center gap-2">
+          <img src="./official-glox-logo-sitemap.png" alt="Glox" class="w-6 h-6 rounded-md object-cover" />
+          <h3 class="font-bold text-slate-900">Scan to Apply — Glox</h3>
+        </div>
         <button onclick="closeQrModal()" class="text-slate-400 hover:text-slate-700 text-lg font-bold">&times;</button>
       </div>
       <p class="text-xs text-slate-500">Candidates can scan this QR code with their phone camera to open and fill out the hiring form.</p>
@@ -214,13 +227,10 @@
   </div>
 
   <script>
-    // Your connected Google Apps Script Web App URL
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby_Oy8hKcc2SIxB2qTWWe3r_bEwYB1NBe8ljIzsd2zI70mPfSZh8OPliYMGuAfy92AP/exec";
 
-    const FORM_URL = window.location.href.startsWith('http')
-      ? window.location.href
-      : 'https://chandegaraharsh464-ui.github.io/Glox-Hiring-Form-/';
-
+    // Automatically adapts to whatever new GitHub Pages repository name you choose
+    const FORM_URL = window.location.href;
     let qrGenerated = false;
 
     function openQrModal() {
@@ -261,13 +271,12 @@
       const canvas = document.querySelector('#qrcode canvas');
       if (canvas) {
         const link = document.createElement('a');
-        link.download = 'Glox-Hiring-Form-QR.png';
+        link.download = 'Glox-Careers-QR.png';
         link.href = canvas.toDataURL('image/png');
         link.click();
       }
     }
 
-    // Submit form data to Google Apps Script (saves to Google Sheet + emails Gmail)
     document.getElementById('hiringForm').addEventListener('submit', async function (e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
